@@ -1,0 +1,184 @@
+</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exercise 12: Libraries &mdash; Learn Ruby The Hard Way</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Learn Ruby The Hard Way" href="index.html" />
+    <link rel="next" title="Exercise 13: Parameters, Unpacking, Variables" href="ex13.html" />
+    <link rel="prev" title="Exercise 11: Asking Questions" href="ex11.html" /> 
+  </head>
+  <body>
+    <div class="related">
+        <ul>
+        <li class="right"><a style="color: #C40B46;" href="http://learncodethehardway.org/contact.html" title="Need Help?">Need Help?</a></li>
+        <li class="right"><a style="color: #C40B46;" href="http://regex.learncodethehardway.org" title="Learn Regex">Learn Regex</a> | </li>
+        <li class="right"><a style="color: #C40B46;" href="http://sql.learncodethehardway.org" title="Learn SQL">Learn SQL</a> | </li>
+        <li class="right"><a style="color: #C40B46;" href="http://c.learncodethehardway.org" title="Learn C">Learn C</a> | </li>
+        <li class="right"><a style="color: #C40B46;" href="http://learnpythonthehardway.org" title="Learn Python">Learn Python</a> | </li>
+        <li><a style="color: #C40B46;" href="https://getdpd.com/v2/cart/add/8273/26787/26335?referer=http%3A//ruby.learncodethehardway.com/book/"><b>Buy PDF - $2.99</b></a> |
+        <li><a style="color: #C40B46;" href="https://getdpd.com/v2/cart/add/8273/26789/26337?referer=http%3A//ruby.learncodethehardway.com/book/"><b>ePub - $2.99</b></a> |
+        <li><a style="color: #C40B46;" href="https://getdpd.com/v2/cart/add/8273/26793/26341?referer=http%3A//ruby.learncodethehardway.com/book/"><b>Both - $5</b></a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ex13.html" title="Exercise 13: Parameters, Unpacking, Variables"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="ex11.html" title="Exercise 11: Asking Questions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://ruby.learncodethehardway.org/">Learn Ruby The Hard Way</a> &raquo;</li> 
+        <li class="right"><a href="search.html" title="search">search</a> | </li>
+      </ul>
+    </div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="exercise-12-libraries">
+<h1>Exercise 12: Libraries<a class="headerlink" href="#exercise-12-libraries" title="Permalink to this headline">¶</a></h1>
+<p>Take a look at this code:</p>
+<div class="highlight-ruby"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
+
+<span class="nb">open</span><span class="p">(</span><span class="s2">&quot;http://www.ruby-lang.org/en&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">each_line</span> <span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="nb">p</span> <span class="n">line</span><span class="p">}</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">base_uri</span>         <span class="c1"># &lt;URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/&gt;</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">content_type</span>     <span class="c1"># &quot;text/html&quot;</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">charset</span>          <span class="c1"># &quot;iso-8859-1&quot;</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">content_encoding</span> <span class="c1"># []</span>
+  <span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">last_modified</span>    <span class="c1"># Thu Dec 05 02:45:02 UTC 2002</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+<p>On line 1 we have what's called a &quot;require&quot;. This is how you add
+features to your script from the Ruby feature set or other sources
+(e.g., Ruby Gems, stuff you wrote yourself). Rather than give you all
+the features at once, Ruby asks you to say what you plan to use. This
+keeps your programs small, but it also acts as documentation for other
+programmers who read your code later.</p>
+<div class="section" id="hold-up-features-have-another-name">
+<h2>Hold Up! Features Have Another Name<a class="headerlink" href="#hold-up-features-have-another-name" title="Permalink to this headline">¶</a></h2>
+<p>I call them &quot;features&quot; here (these little things you require to make
+your Ruby program do more) but nobody else calls them features. I just
+used that name because I needed to trick you into learning what they are
+without jargon. Before you can continue, you need to learn their real
+name: <tt class="docutils literal"><span class="pre">libraries</span></tt>.</p>
+<p>From now on we will be calling these &quot;features&quot; that we require
+<tt class="docutils literal"><span class="pre">libraries</span></tt>. I'll say things like, &quot;You want to require the
+<tt class="docutils literal"><span class="pre">open-uri</span></tt> library.&quot; They are also called &quot;modules&quot; by other
+programmers, but let's just stick with <tt class="docutils literal"><span class="pre">libraries</span></tt>.</p>
+</div>
+<div class="section" id="extra-credit">
+<h2>Extra Credit<a class="headerlink" href="#extra-credit" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Research the difference between <tt class="docutils literal"><span class="pre">require</span></tt> and <tt class="docutils literal"><span class="pre">include</span></tt>. How are
+they different?</li>
+<li>Can you <tt class="docutils literal"><span class="pre">require</span></tt> a script that doesn't contain a <tt class="docutils literal"><span class="pre">library</span></tt>
+specifically?</li>
+<li>Figure out which directories on your system Ruby will look in to find
+the libraries you require.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+        <ul>
+        <li class="right"><a style="color: #C40B46;" href="http://learncodethehardway.org/contact.html" title="Need Help?">Need Help?</a></li>
+        <li class="right"><a style="color: #C40B46;" href="http://regex.learncodethehardway.org" title="Learn Regex">Learn Regex</a> | </li>
+        <li class="right"><a style="color: #C40B46;" href="http://sql.learncodethehardway.org" title="Learn SQL">Learn SQL</a> | </li>
+        <li class="right"><a style="color: #C40B46;" href="http://c.learncodethehardway.org" title="Learn C">Learn C</a> | </li>
+        <li class="right"><a style="color: #C40B46;" href="http://learnpythonthehardway.org" title="Learn Python">Learn Python</a> | </li>
+        <li><a style="color: #C40B46;" href="https://getdpd.com/v2/cart/add/8273/26787/26335?referer=http%3A//ruby.learncodethehardway.com/book/"><b>Buy PDF - $2.99</b></a> |
+        <li><a style="color: #C40B46;" href="https://getdpd.com/v2/cart/add/8273/26789/26337?referer=http%3A//ruby.learncodethehardway.com/book/"><b>ePub - $2.99</b></a> |
+        <li><a style="color: #C40B46;" href="https://getdpd.com/v2/cart/add/8273/26793/26341?referer=http%3A//ruby.learncodethehardway.com/book/"><b>Both - $5</b></a></li>
+        </ul>
+    </div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ex13.html" title="Exercise 13: Parameters, Unpacking, Variables"
+             >next</a></li>
+        <li class="right" >
+          <a href="ex11.html" title="Exercise 11: Asking Questions"
+             >previous</a> |</li>
+        <li><a href="http://ruby.learncodethehardway.org/">Learn Ruby The Hard Way</a> &raquo;</li> 
+        <li class="right"><a href="search.html" title="search">search</a> | </li>
+      </ul>
+    </div>
+    <a name="comments"><hr/></a>
+
+<div sytle="text-align: left">
+    <div style="background: white; padding: 10px" id="disqus_thread"></div>
+</div>
+    <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'learn-code-the-hard-way'; // required: replace example with your forum shortname
+
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <div class="footer">
+      &copy; Copyright 2010, Zed A. Shaw and Rob Sobers.
+      Last updated on Oct 05, 2012.
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24168052-9']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  </body>
+</html>
