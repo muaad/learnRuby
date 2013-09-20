@@ -1,5 +1,13 @@
-def write_to_file(file_name, content)
-	File.open(file_name, 'w') {
-		|f| f.write(content) 
-	}
-end
+def write_to_file(file_name, content, action)
+   File.open(file_name, action) {|f| f.write(content) }
+   end
+puts "Enter the file name:"
+file_name = gets.chomp
+puts "Enter the file contents:"
+content = gets.chomp
+puts "Type \'w\' if you want to create a new file or \'a\' if you want to append content to an existing file:"
+action = gets.chomp
+
+write_to_file(file_name, content, action)
+
+
