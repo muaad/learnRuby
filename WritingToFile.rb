@@ -1,6 +1,5 @@
 def write_to_file(file_name, content, action)
-   quote = "\'"
-   File.open(file_name, quote + action + quote) {|f| f.write(content) }
+   File.open(file_name, action) {|f| f.write(content) }
    end
 puts "Enter the file name:"
 file_name = gets.chomp
