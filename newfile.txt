@@ -1,3 +1,3 @@
-Njeri
-Some more text apended
-More text
+Line 1
+Line 2
+Line 3
